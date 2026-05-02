@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Judging App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="login">
+  <h2>Login</h2>
+  <input id="user" placeholder="Username"><br><br>
+  <input id="pass" type="password" placeholder="Password"><br><br>
+  <button onclick="login()">Login</button>
+</div>
+
+<div id="judge" style="display:none">
+  <h2>Judge Form</h2>
+  <table>
+    <tr>
+      <td>Criteria 1</td>
+      <td><input type="number" onchange="disableRow(this)"></td>
+      <td><input type="number" onchange="disableRow(this)"></td>
+    </tr>
+    <tr>
+      <td>Criteria 2</td>
+      <td><input type="number" onchange="disableRow(this)"></td>
+      <td><input type="number" onchange="disableRow(this)"></td>
+    </tr>
+    <tr>
+      <td>Criteria 3</td>
+      <td><input type="number" onchange="disableRow(this)"></td>
+      <td><input type="number" onchange="disableRow(this)"></td>
+    </tr>
+    <tr>
+      <td>Criteria 4</td>
+      <td><input type="number" onchange="disableRow(this)"></td>
+      <td><input type="number" onchange="disableRow(this)"></td>
+    </tr>
+  </table>
+
+  <button onclick="submitScores()">Submit</button>
+</div>
+
+<div id="admin" style="display:none">
+  <h2>Admin Dashboard</h2>
+  <p id="data"></p>
+  <button onclick="loadAdmin()">Refresh</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
