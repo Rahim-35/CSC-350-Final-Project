@@ -1,24 +1,54 @@
-body {
+body{
   font-family: Arial;
-  background: #f4f4f4;
-  text-align: center;
+  background:#f4f4f4;
 }
 
-table {
-  margin: auto;
-  border-collapse: collapse;
+#loginBox{
+  width:300px;
+  margin:auto;
+  margin-top:50px;
+  text-align:center;
 }
 
-td {
-  border: 1px solid #ccc;
-  padding: 10px;
+table{
+  width:90%;
+  margin:auto;
+  border-collapse:collapse;
+  background:#d9d9d9;
 }
 
-input {
-  padding: 5px;
+td, th{
+  border:1px solid white;
+  padding:8px;
+  vertical-align:top;
 }
 
-button {
-  padding: 10px;
-  margin-top: 10px;
+.title{
+  text-align:center;
+  font-size:22px;
+  background:#cfcfcf;
+}
+
+.criteria{
+  width:40%;
+  height:70px;
+}
+
+input[type=number]{
+  width:80px;
+  padding:5px;
+}
+
+button{
+  padding:10px 20px;
+  font-size:16px;
+}
+
+#judge{
+  margin-top:20px;
+}
+
+#admin{
+  text-align:center;
+  margin-top:40px;
 }
