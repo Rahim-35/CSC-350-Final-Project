@@ -4,7 +4,7 @@ async function login(){
   let username = document.getElementById("user").value;
   let password = document.getElementById("pass").value;
 
-  let res = await fetch("/login",{
+  let res = await fetch("/login", {
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body: JSON.stringify({username,password})
@@ -12,9 +12,13 @@ async function login(){
 
   let data = await res.json();
 
-  if(!data.success) return alert("Invalid login");
+  if(!data.success){
+    alert("Invalid login");
+    return;
+  }
 
   currentUser = username;
+
   document.getElementById("login").style.display = "none";
 
   if(data.admin){
@@ -25,31 +29,51 @@ async function login(){
   }
 }
 
-function disableRow(input){
-  let row = input.parentElement.parentElement;
-  let inputs = row.querySelectorAll("input");
+// disable opposite column rule
+document.addEventListener("input", (e) => {
+  if(e.target.type !== "number") return;
 
-  inputs.forEach(i=>{
-    if(i!==input && input.value!==""){
-      i.disabled = true;
-    } else if(input.value===""){
-      i.disabled = false;
+  let row = e.target.closest("tr");
+  if(!row) return;
+
+  let dev = row.children[1]?.querySelector("input");
+  let acc = row.children[2]?.querySelector("input");
+
+  if(dev && acc){
+    if(dev.value !== ""){
+      acc.disabled = true;
+    } else {
+      acc.disabled = false;
     }
-  });
-}
+
+    if(acc.value !== ""){
+      dev.disabled = true;
+    } else {
+      dev.disabled = false;
+    }
+  }
+});
 
 async function submitScores(){
-  let inputs = document.querySelectorAll("#judge input");
   let total = 0;
 
-  inputs.forEach(i=>{
-    if(i.value) total += parseInt(i.value);
+  document.querySelectorAll("tr").forEach(row=>{
+    let dev = row.children[1]?.querySelector("input");
+    let acc = row.children[2]?.querySelector("input");
+
+    if(dev) total += parseInt(dev.value || 0);
+    if(acc) total += parseInt(acc.value || 0);
   });
+
+  document.getElementById("finalTotal").innerText = total;
 
   await fetch("/submit",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({user:currentUser,total})
+    body: JSON.stringify({
+      user: currentUser,
+      total
+    })
   });
 
   alert("Submitted! Total: " + total);
@@ -60,5 +84,5 @@ async function loadAdmin(){
   let data = await res.json();
 
   document.getElementById("data").innerText =
-    "Submissions: " + data.count + " | Average: " + data.avg.toFixed(2);
+    `Submissions: ${data.count} | Average: ${data.avg.toFixed(2)}`;
 }
