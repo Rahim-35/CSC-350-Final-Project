@@ -1,164 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Computer Science Project</title>
+  <title>Computer Science Project Judging</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="loginBox">
+<div id="login">
   <h2>Judge Login</h2>
-
   <input id="user" placeholder="Username"><br><br>
-
   <input id="pass" type="password" placeholder="Password"><br><br>
-
   <button onclick="login()">Login</button>
 </div>
 
 <div id="judge" style="display:none">
 
+  <h2>Computer Science Project</h2>
+
   <table>
+
     <tr>
-      <th colspan="3" class="title">
-        Computer Science Project
-      </th>
+      <th colspan="2">Group Members:</th>
+      <th colspan="2"><input></th>
     </tr>
 
     <tr>
-      <td colspan="2"><b>Group Members:</b></td>
-      <td><b>Group Number:</b></td>
+      <th colspan="2">Group Number:</th>
+      <th colspan="2"><input></th>
     </tr>
 
     <tr>
-      <td colspan="3"><b>Project Title:</b></td>
+      <th colspan="4">Project Title: <input style="width:60%"></th>
     </tr>
 
     <tr>
-      <td><b>Criteria</b></td>
-      <td>Developing (0-10)</td>
-      <td>Accomplished (11-15)</td>
+      <th>Criteria</th>
+      <th>Developing (0-10)</th>
+      <th>Accomplished (11-15)</th>
+      <th>Total</th>
     </tr>
 
     <tr>
-      <td class="criteria">
-        <b>Articulate requirements</b>
-      </td>
-
-      <td>
-        <input type="number"
-               min="0"
-               max="10"
-               onchange="disableRow(this)">
-      </td>
-
-      <td>
-        <input type="number"
-               min="11"
-               max="15"
-               onchange="disableRow(this)">
-      </td>
+      <td>Articulate requirements</td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td class="rowTotal">0</td>
     </tr>
 
     <tr>
-      <td class="criteria">
-        <b>Choose appropriate tools and methods for each task</b>
-      </td>
-
-      <td>
-        <input type="number"
-               min="0"
-               max="10"
-               onchange="disableRow(this)">
-      </td>
-
-      <td>
-        <input type="number"
-               min="11"
-               max="15"
-               onchange="disableRow(this)">
-      </td>
+      <td>Choose appropriate tools and methods</td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td class="rowTotal">0</td>
     </tr>
 
     <tr>
-      <td class="criteria">
-        <b>Give clear and coherent oral presentation</b>
-      </td>
-
-      <td>
-        <input type="number"
-               min="0"
-               max="10"
-               onchange="disableRow(this)">
-      </td>
-
-      <td>
-        <input type="number"
-               min="11"
-               max="15"
-               onchange="disableRow(this)">
-      </td>
+      <td>Give clear oral presentation</td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td class="rowTotal">0</td>
     </tr>
 
     <tr>
-      <td class="criteria">
-        <b>Functioned well as a team</b>
-      </td>
-
-      <td>
-        <input type="number"
-               min="0"
-               max="10"
-               onchange="disableRow(this)">
-      </td>
-
-      <td>
-        <input type="number"
-               min="11"
-               max="15"
-               onchange="disableRow(this)">
-      </td>
+      <td>Functioned well as a team</td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td class="rowTotal">0</td>
     </tr>
 
     <tr>
-      <td align="center"><b>Total</b></td>
-      <td id="total1"></td>
-      <td id="total2"></td>
+      <td colspan="3"><b>Total</b></td>
+      <td id="finalTotal">0</td>
     </tr>
 
     <tr>
-      <td colspan="3">
-        <b>Judge's name:</b>
-      </td>
+      <td>Judge Name:</td>
+      <td colspan="3"><input id="judgeName"></td>
     </tr>
 
     <tr>
-      <td colspan="3" style="height:80px;">
-        <b>Comments:</b>
-      </td>
+      <td>Comments:</td>
+      <td colspan="3"><input id="comments"></td>
     </tr>
 
   </table>
 
-  <br>
-
-  <button onclick="submitScores()">
-    Submit
-  </button>
-
+  <button onclick="submitScores()">Submit</button>
 </div>
 
 <div id="admin" style="display:none">
   <h2>Admin Dashboard</h2>
-
   <p id="data"></p>
-
-  <button onclick="loadAdmin()">
-    Refresh
-  </button>
+  <button onclick="loadAdmin()">Refresh</button>
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
