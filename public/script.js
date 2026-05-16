@@ -29,7 +29,7 @@ async function login(){
   }
 }
 
-// disable opposite column rule
+// disable opposite column rule (kept same but safer)
 document.addEventListener("input", (e) => {
   if(e.target.type !== "number") return;
 
@@ -57,12 +57,18 @@ document.addEventListener("input", (e) => {
 async function submitScores(){
   let total = 0;
 
-  document.querySelectorAll("tr").forEach(row=>{
+  // ONLY score rows (prevents NaN from non-score inputs)
+  document.querySelectorAll(".rowTotal").forEach(cell => {
+    let row = cell.parentElement;
+
     let dev = row.children[1]?.querySelector("input");
     let acc = row.children[2]?.querySelector("input");
 
-    if(dev) total += parseInt(dev.value || 0);
-    if(acc) total += parseInt(acc.value || 0);
+    let devVal = Number(dev?.value);
+    let accVal = Number(acc?.value);
+
+    if(!isNaN(devVal)) total += devVal;
+    if(!isNaN(accVal)) total += accVal;
   });
 
   document.getElementById("finalTotal").innerText = total;
