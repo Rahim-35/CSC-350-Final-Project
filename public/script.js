@@ -29,7 +29,10 @@ async function login(){
   }
 }
 
-// disable opposite column rule (kept same but safer)
+//
+// Developing = 0–10
+// Accomplished = 11–15
+//
 document.addEventListener("input", (e) => {
   if(e.target.type !== "number") return;
 
@@ -39,25 +42,36 @@ document.addEventListener("input", (e) => {
   let dev = row.children[1]?.querySelector("input");
   let acc = row.children[2]?.querySelector("input");
 
-  if(dev && acc){
-    if(dev.value !== ""){
-      acc.disabled = true;
-    } else {
-      acc.disabled = false;
-    }
+  if(!dev || !acc) return;
 
-    if(acc.value !== ""){
-      dev.disabled = true;
-    } else {
-      dev.disabled = false;
-    }
+  // Force numeric limits
+  if(dev){
+    dev.min = 0;
+    dev.max = 10;
+  }
+
+  if(acc){
+    acc.min = 11;
+    acc.max = 15;
+  }
+
+  // ❌ Prevent both being filled
+  if(dev.value !== ""){
+    acc.disabled = true;
+  } else {
+    acc.disabled = false;
+  }
+
+  if(acc.value !== ""){
+    dev.disabled = true;
+  } else {
+    dev.disabled = false;
   }
 });
 
 async function submitScores(){
   let total = 0;
 
-  // ONLY score rows (prevents NaN from non-score inputs)
   document.querySelectorAll(".rowTotal").forEach(cell => {
     let row = cell.parentElement;
 
@@ -66,6 +80,16 @@ async function submitScores(){
 
     let devVal = Number(dev?.value);
     let accVal = Number(acc?.value);
+
+    if(devVal !== 0 && (devVal < 0 || devVal > 10)){
+      alert("Developing scores must be between 0 and 10");
+      throw new Error("Invalid Developing score");
+    }
+
+    if(accVal !== 0 && (accVal < 11 || accVal > 15)){
+      alert("Accomplished scores must be between 11 and 15");
+      throw new Error("Invalid Accomplished score");
+    }
 
     if(!isNaN(devVal)) total += devVal;
     if(!isNaN(accVal)) total += accVal;
